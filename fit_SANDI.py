@@ -11,7 +11,7 @@ import os
 import amico 
 import numpy as np
 
-amico.core.setup( ndirs=1 )
+amico.core.setup()
 
 def main():
     #-----------------
@@ -72,10 +72,10 @@ def main():
     ae.load_data(dwi_filename = dwiFile, scheme_filename = os.path.join(subjectDirectory,'SANDI.scheme'), mask_filename = maskFile, b0_thr = args.b0_thr)
     ae.set_model("SANDI")
     
-    d_is = 3.0E-3                                 # Intra-soma diffusivity [mm^2/s]
-    Rs = np.array([1.55555556e-06,3.44444444e-06,4.44444444e-06,5.33333333e-06,6.00000000e-06,6.55555556e-06,8.11111111e-06,9.55555556e-06,1.16666667e-05])                    # Radii of the soma [meters]
-    d_in = np.array([0.00091667,0.00169444,0.003])    # Intra-neurite diffusivitie(s) [mm^2/s]
-    d_isos = np.array([0.00036111,0.00163889,0.003])  # Extra-cellular isotropic mean diffusivitie(s) [mm^2/s]
+    d_is = 3.0E-3        # Intra-soma diffusivity [mm^2/s]
+    Rs = np.linspace(1.0,12.0,5) * 1E-6           # Radii of the soma [meters]
+    d_in = np.linspace(0.25,3.0,5) * 1E-3         # Intra-neurite diffusivitie(s) [mm^2/s]
+    d_isos = np.linspace(0.25,3.0,5) * 1E-3       # Extra-cellular isotropic mean diffusivitie(s) [mm^2/s]
 
     ae.model.set(d_is, Rs, d_in, d_isos) 
     ae.generate_kernels(regenerate=True, ndirs=1)
