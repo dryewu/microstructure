@@ -59,7 +59,6 @@ def main():
     FW = fwdtifit.f
     RD = fwdtifit.rd
     AD = fwdtifit.ad
-    ADC = fwdtifit.adc
 
     outdir = os.path.join(subjectDirectory,'FWDTI')
     if not os.path.exists(outdir):
@@ -70,7 +69,6 @@ def main():
     save_nifti(os.path.join(outdir,'FW.nii.gz'), FW, dwi_affine)
     save_nifti(os.path.join(outdir,'RD.nii.gz'), RD, dwi_affine)
     save_nifti(os.path.join(outdir,'AD.nii.gz'), AD, dwi_affine)
-    save_nifti(os.path.join(outdir,'ADC.nii.gz'), ADC, dwi_affine)
                 
 if __name__ == '__main__':
     main()

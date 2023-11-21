@@ -66,23 +66,22 @@ def main():
     amico.util.sandi2scheme(bvalFile, bvecFile, args.Delta, args.delta, TE_data=args.TE, schemeFilename=os.path.join(subjectDirectory,'SANDI.scheme'),bStep = args.b0_step)
     
     ae = amico.Evaluation(subjectDirectory, '.')
-    ae.set_config("doDebiasSignal",False)
     ae.set_config('doDirectionalAverage', True)
     
     ae.load_data(dwi_filename = dwiFile, scheme_filename = os.path.join(subjectDirectory,'SANDI.scheme'), mask_filename = maskFile, b0_thr = args.b0_thr)
     ae.set_model("SANDI")
     
-    d_is = 3.0E-3        # Intra-soma diffusivity [mm^2/s]
-    Rs = np.linspace(1.0,12.0,5) * 1E-6           # Radii of the soma [meters]
-    d_in = np.linspace(0.25,3.0,5) * 1E-3         # Intra-neurite diffusivitie(s) [mm^2/s]
-    d_isos = np.linspace(0.25,3.0,5) * 1E-3       # Extra-cellular isotropic mean diffusivitie(s) [mm^2/s]
+    d_is = 3.0e-3        # Intra-soma diffusivity [mm^2/s]
+    Rs = np.linspace(1.0,12.0,5) * 1e-6           # Radii of the soma [meters]
+    d_in = np.linspace(0.25,3.0,5) * 1e-3         # Intra-neurite diffusivitie(s) [mm^2/s]
+    d_isos = np.linspace(0.25,3.0,5) * 1e-3       # Extra-cellular isotropic mean diffusivitie(s) [mm^2/s]
 
     ae.model.set(d_is, Rs, d_in, d_isos) 
     ae.generate_kernels(regenerate=True, ndirs=1)
     ae.load_kernels()
     
     lambda1 = 0  
-    lambda2 = 5.0E-3
+    lambda2 = 5e-3
     ae.set_solver( lambda1=lambda1, lambda2=lambda2 ) 
     ae.fit()
     ae.save_results(save_dir_avg=True)
