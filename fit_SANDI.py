@@ -46,7 +46,7 @@ def main():
         '-b0step', action="store", dest="b0_step", type=float, default=100,
         help='Threshold for normalize b-value.')
     parser.add_argument(
-        '-TE', action="store", dest="TE", type=float, default=0.030,
+        '-TE', action="store", dest="TE", type=float, default=0.10,
         help='echo time if different from delta+small_delta [s] (optional).')
     parser.add_argument(
         '-Delta', action="store", dest="Delta", type=float, default=0.020,
